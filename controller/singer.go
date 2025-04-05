@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/pulse227/server-recruit-challenge-sample/model"
-	"github.com/pulse227/server-recruit-challenge-sample/service"
+	"github.com/gohantabeta/server-recruit-challenge-sample/model"
+	"github.com/gohantabeta/server-recruit-challenge-sample/service"
 )
 
 type singerController struct {

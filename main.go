@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/pulse227/server-recruit-challenge-sample/api"
+	"github.com/gohantabeta/server-recruit-challenge-sample/api"
 )
 
 func main() {

@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/pulse227/server-recruit-challenge-sample/model"
-	"github.com/pulse227/server-recruit-challenge-sample/repository"
+	"github.com/gohantabeta/server-recruit-challenge-sample/model"
+	"github.com/gohantabeta/server-recruit-challenge-sample/repository"
 )
 
 func NewSingerRepository(db *sql.DB) *singerRepository {

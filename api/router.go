@@ -3,10 +3,10 @@ package api
 import (
 	"net/http"
 
-	"github.com/pulse227/server-recruit-challenge-sample/api/middleware"
-	"github.com/pulse227/server-recruit-challenge-sample/controller"
-	"github.com/pulse227/server-recruit-challenge-sample/infra/mysqldb"
-	"github.com/pulse227/server-recruit-challenge-sample/service"
+	"github.com/gohantabeta/server-recruit-challenge-sample/api/middleware"
+	"github.com/gohantabeta/server-recruit-challenge-sample/controller"
+	"github.com/gohantabeta/server-recruit-challenge-sample/infra/mysqldb"
+	"github.com/gohantabeta/server-recruit-challenge-sample/service"
 )
 
 func NewRouter(
