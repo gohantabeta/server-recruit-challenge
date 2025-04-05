@@ -67,8 +67,8 @@ func (r *albumRepository) Get(ctx context.Context, id model.AlbumID) (*model.Alb
 }
 
 func (r *albumRepository) Add(ctx context.Context, album *model.Album) error {
-	query := "INSERT INTO albums (id, title) VALUES (?, ?)"
-	if _, err := r.db.ExecContext(ctx, query, album.ID, album.Title); err != nil {
+	query := "INSERT INTO albums (id, title, singer_id) VALUES (?, ?, ?)"
+	if _, err := r.db.ExecContext(ctx, query, album.ID, album.Title, album.SingerID); err != nil {
 		return err
 	}
 	return nil

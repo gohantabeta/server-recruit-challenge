@@ -94,7 +94,7 @@ curl http://localhost:8888/albums/1
 {"id":1,"title":"Alice's 1st Album","singer_id":1}
 ```
 
-### 3-3
+### 3-3　（完了）
 アルバムを追加するAPI
 ```
 curl -X POST -d '{"id":10,"title":"Chris 1st","singer_id":3}' http://localhost:8888/albums
@@ -102,11 +102,17 @@ curl -X POST -d '{"id":10,"title":"Chris 1st","singer_id":3}' http://localhost:8
 # このようなレスポンスを期待しています
 {"id":10,"title":"Chris 1st","singer_id":3}
 
+#実装時レスポンス
+{"id":10,"title":"Chris 1st","singer_id":3}
+
 # そして、アルバムを取得するAPIでは、追加したものが存在するように
 curl http://localhost:8888/albums/10
+
+#実装時レスポンス
+{"id":10,"title":"Chris 1st","singer_id":3}
 ```
 
-### 3-4
+### 3-4　（完了）
 アルバムを削除するAPI
 ```
 curl -X DELETE http://localhost:8888/albums/10
