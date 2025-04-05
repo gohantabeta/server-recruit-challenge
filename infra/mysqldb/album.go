@@ -22,7 +22,7 @@ var _ repository.AlbumRepository = (*albumRepository)(nil)
 
 func (r *albumRepository) GetAll(ctx context.Context) ([]*model.Album, error) {
 	albums := []*model.Album{}
-	query := "SELECT id, name FROM albums ORDER BY id ASC"
+	query := "SELECT id, title, singer_id  FROM albums ORDER BY id ASC"
 	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
@@ -30,7 +30,7 @@ func (r *albumRepository) GetAll(ctx context.Context) ([]*model.Album, error) {
 	defer rows.Close()
 	for rows.Next() {
 		album := &model.Album{}
-		if err := rows.Scan(&album.ID, &album.Name); err != nil {
+		if err := rows.Scan(&album.ID, &album.Title, &album.SingerID); err != nil {
 			return nil, err
 		}
 		if album.ID != 0 {
@@ -46,14 +46,14 @@ func (r *albumRepository) GetAll(ctx context.Context) ([]*model.Album, error) {
 
 func (r *albumRepository) Get(ctx context.Context, id model.AlbumID) (*model.Album, error) {
 	album := &model.Album{}
-	query := "SELECT id, name FROM albums WHERE id = ?"
+	query := "SELECT id, title, singer_id FROM albums WHERE id = ?"
 	rows, err := r.db.QueryContext(ctx, query, id)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&album.ID, &album.Name); err != nil {
+		if err := rows.Scan(&album.ID, &album.Title, &album.SingerID); err != nil {
 			return nil, err
 		}
 	}
@@ -67,8 +67,8 @@ func (r *albumRepository) Get(ctx context.Context, id model.AlbumID) (*model.Alb
 }
 
 func (r *albumRepository) Add(ctx context.Context, album *model.Album) error {
-	query := "INSERT INTO albums (id, name) VALUES (?, ?)"
-	if _, err := r.db.ExecContext(ctx, query, album.ID, album.Name); err != nil {
+	query := "INSERT INTO albums (id, title) VALUES (?, ?)"
+	if _, err := r.db.ExecContext(ctx, query, album.ID, album.Title); err != nil {
 		return err
 	}
 	return nil
