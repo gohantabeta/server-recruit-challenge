@@ -8,10 +8,10 @@
 
 面接中に課題に関して質問をしますので、分かる範囲で説明してください。
 
-## 課題1
+## 課題1（完了）
 プログラムのコードを読み、中身を把握しましょう。
 
-## 課題2
+## 課題2　（完了）
 Docker と Go をインストールし(各自で調べてください)、歌手を管理するAPIの動作を確認しましょう。
 
 ```
@@ -27,11 +27,41 @@ go run main.go
 # 歌手の一覧を取得する
 curl http://localhost:8888/singers
 
+[
+  {
+    "id": 1,
+    "name": "Alice"
+  },
+  {
+    "id": 2,
+    "name": "Bella"
+  },
+  {
+    "id": 3,
+    "name": "Chris"
+  },
+  {
+    "id": 4,
+    "name": "Daisy"
+  },
+  {
+    "id": 5,
+    "name": "Ellen"
+  }
+]
+
 # 指定したIDの歌手を取得する
 curl http://localhost:8888/singers/1
+{
+  "id": 1,
+  "name": "Alice"
+}
 
 # 歌手を追加する
 curl -X POST -d '{"id":10,"name":"John"}' http://localhost:8888/singers
+{
+    "id":10,"name":"John"
+}
 
 # 歌手を削除する
 curl -X DELETE http://localhost:8888/singers/10
