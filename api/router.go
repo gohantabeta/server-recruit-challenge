@@ -26,7 +26,7 @@ func NewRouter(
 	singerController := controller.NewSingerController(singerService)
 	albumRepo := mysqldb.NewAlbumRepository(dbClient)
 	albumService := service.NewAlbumService(albumRepo)
-	albumController := controller.NewAlbumController(albumService)
+	albumController := controller.NewAlbumController(albumService, singerService)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /singers", singerController.GetSingerListHandler)

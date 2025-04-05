@@ -128,6 +128,9 @@ curl http://localhost:8888/albums/1
 
 # このようなレスポンスを期待しています
 {"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}}
+
+# 実装時レスポンス
+{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}}
 ```
 
 ### 4-2
@@ -137,6 +140,9 @@ curl http://localhost:8888/albums
 
 # このようなレスポンスを期待しています
 [{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}},{"id":2,"title":"Alice's 2nd Album","singer":{"id":1,"name":"Alice"}},{"id":3,"title":"Bella's 1st Album","singer":{"id":2,"name":"Bella"}}]
+
+#　実装時レスポンス
+[{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}},{"id":2,"title":"Alice's 2nd Album","singer":{"id":1,"name":"Alice"}},{"id":3,"title":"Bella's 1st Album","singer":{"id":2,"name":"Bella"}}]
 ```
 
 ## 課題5
@@ -145,16 +151,21 @@ curl http://localhost:8888/albums
 ### 以下のようなデータに対応する
 - １つのアルバムに複数の歌手
 - 歌手以外にグループや作詞家・作曲家のデータ
+- 同一歌手の改名前後の名前
 - ジャンル
 - 複数のタグ
-- リリース日
 - アルバムを説明するテキスト
 - 収録楽曲
 - ジャケット画像
-- 料金
 - 配信サービス等でのURL
-- 実在するアルバムの規格品番
 - 歌手名やアルバム名に含まれる独特な字（文字コードにない場合のある字）
+- 複数のCDで構成されるアルバムのCD毎のデータ
+- メタデータ
+  - 実在するアルバムの規格品番やJASRAC許諾番号等
+  - データサイズ
+  - 販売価格
+  - リリース日
+  - 原産地
 
 ### 以下のようなセキュリティの向上
 - ログイン機能とログインしているユーザーのみにDBの更新操作を出来るように変更
@@ -163,9 +174,14 @@ curl http://localhost:8888/albums
 - メンテナンスモード実装
 - DBユーザー情報等を環境変数として別ファイルへ記載
 
-### 以下のような機能を追加
+### 以下のような機能の追加
 - タグやキーワード複雑な検索
 - 検索用サービスを用いた曖昧なワードでの検索の実装
 - csvやjsonでの一括登録機能
 - csvやjsonとの差分を返す機能
 - AIでの網羅的なタグ付け
+- 変更履歴を返す機能
+
+### 以下のような速度改善施策の実装
+- キャッシュ
+- /infra/mysqldb で実装するメソッドを増やすもしくはORMを導入し少ないトランザクション回数で済むようにする
