@@ -50,8 +50,38 @@ curl http://localhost:8888/singers
   }
 ]
 
+#全課題完了時レスポンス
+[
+  {
+    "id": 1,
+    "name": "Alice"
+  },
+  {
+    "id": 2,
+    "name": "Bella"
+  },
+  {
+    "id": 3,
+    "name": "Chris"
+  },
+  {
+    "id": 4,
+    "name": "Daisy"
+  },
+  {
+    "id": 5,
+    "name": "Ellen"
+  }
+]
+
 # 指定したIDの歌手を取得する
 curl http://localhost:8888/singers/1
+{
+  "id": 1,
+  "name": "Alice"
+}
+
+#全課題完了時レスポンス
 {
   "id": 1,
   "name": "Alice"
@@ -61,6 +91,11 @@ curl http://localhost:8888/singers/1
 curl -X POST -d '{"id":10,"name":"John"}' http://localhost:8888/singers
 {
     "id":10,"name":"John"
+}
+
+#全課題完了時レスポンス
+{
+  "id":10,"name":"John"
 }
 
 # 歌手を削除する
@@ -80,6 +115,9 @@ curl http://localhost:8888/albums
 
 # 実装時レスポンス
 [{"id":1,"title":"Alice's 1st Album","singer_id":1},{"id":2,"title":"Alice's 2nd Album","singer_id":1},{"id":3,"title":"Bella's 1st Album","singer_id":2}]
+
+#全課題完了時レスポンス
+[{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}},{"id":2,"title":"Alice's 2nd Album","singer":{"id":1,"name":"Alice"}},{"id":3,"title":"Bella's 1st Album","singer":{"id":2,"name":"Bella"}}]
 ```
 
 ### 3-2　（完了）
@@ -92,6 +130,9 @@ curl http://localhost:8888/albums/1
 
 #実装時レスポンス
 {"id":1,"title":"Alice's 1st Album","singer_id":1}
+
+#全課題完了時レスポンス
+{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}}
 ```
 
 ### 3-3　（完了）
@@ -105,11 +146,17 @@ curl -X POST -d '{"id":10,"title":"Chris 1st","singer_id":3}' http://localhost:8
 #実装時レスポンス
 {"id":10,"title":"Chris 1st","singer_id":3}
 
+#全課題完了時レスポンス
+{"id":10,"title":"Chris 1st","singer_id":3}
+
 # そして、アルバムを取得するAPIでは、追加したものが存在するように
 curl http://localhost:8888/albums/10
 
 #実装時レスポンス
 {"id":10,"title":"Chris 1st","singer_id":3}
+
+#全課題完了時レスポンス
+{"id":10,"title":"Chris 1st","singer":{"id":3,"name":"Chris"}}
 ```
 
 ### 3-4　（完了）
@@ -131,6 +178,9 @@ curl http://localhost:8888/albums/1
 
 # 実装時レスポンス
 {"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}}
+
+#全課題完了時レスポンス
+{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}}
 ```
 
 ### 4-2
@@ -142,6 +192,9 @@ curl http://localhost:8888/albums
 [{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}},{"id":2,"title":"Alice's 2nd Album","singer":{"id":1,"name":"Alice"}},{"id":3,"title":"Bella's 1st Album","singer":{"id":2,"name":"Bella"}}]
 
 #　実装時レスポンス
+[{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}},{"id":2,"title":"Alice's 2nd Album","singer":{"id":1,"name":"Alice"}},{"id":3,"title":"Bella's 1st Album","singer":{"id":2,"name":"Bella"}}]
+
+#全課題完了時レスポンス
 [{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}},{"id":2,"title":"Alice's 2nd Album","singer":{"id":1,"name":"Alice"}},{"id":3,"title":"Bella's 1st Album","singer":{"id":2,"name":"Bella"}}]
 ```
 
@@ -184,4 +237,4 @@ curl http://localhost:8888/albums
 
 ### 以下のような速度改善施策の実装
 - キャッシュ
-- /infra/mysqldb で実装するメソッドを増やすもしくはORMを導入し少ないトランザクション回数で済むようにする
+- /infra/mysqldb で実装するメソッドを増やすもしくはORMを導入し少ないトランザクション回数で処理が完了するようにする
